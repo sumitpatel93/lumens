@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Uploaded files
+src/uploads/
+
+# macOS
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/

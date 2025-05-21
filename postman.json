@@ -1,0 +1,627 @@
+{
+  "info": {
+    "_postman_id": "a1234567-89ab-cdef-0123-456789abcdef",
+    "name": "Sales Analytics API",
+    "description": "API for analyzing sales data and performing data refresh operations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "health"
+          ]
+        },
+        "description": "Check if the API is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Data Management",
+      "item": [
+        {
+          "name": "Upload CSV File",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/your/sales_data.csv"
+                },
+                {
+                  "key": "mode",
+                  "value": "append",
+                  "description": "Use 'append' or 'overwrite'",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/data/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "data",
+                "upload"
+              ]
+            },
+            "description": "Upload a new CSV file and process it"
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Data (Append)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"mode\": \"append\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/data/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "data",
+                "refresh"
+              ]
+            },
+            "description": "Refresh data using most recent CSV in append mode"
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Data (Overwrite)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"mode\": \"overwrite\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/data/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "data",
+                "refresh"
+              ]
+            },
+            "description": "Refresh data using most recent CSV in overwrite mode"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Data Refresh History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/data/history?limit=10&offset=0",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "data",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get history of data refresh operations"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Revenue Analysis",
+      "item": [
+        {
+          "name": "Total Revenue",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/total?startDate=2023-01-01&endDate=2024-12-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "total"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            },
+            "description": "Calculate total revenue for a date range"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue by Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/by-product?startDate=2023-01-01&endDate=2024-12-31&limit=100&offset=0",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "by-product"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Calculate revenue breakdown by product"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/by-category?startDate=2023-01-01&endDate=2024-12-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "by-category"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            },
+            "description": "Calculate revenue breakdown by product category"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue by Region",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/by-region?startDate=2023-01-01&endDate=2024-12-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "by-region"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            },
+            "description": "Calculate revenue breakdown by region"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue Trends (Monthly)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/trends?startDate=2023-01-01&endDate=2024-12-31&interval=monthly",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "trends"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "interval",
+                  "value": "monthly"
+                }
+              ]
+            },
+            "description": "Calculate revenue trends over time by month"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue Trends (Daily)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/trends?startDate=2024-01-01&endDate=2024-01-31&interval=daily",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "trends"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-01-31"
+                },
+                {
+                  "key": "interval",
+                  "value": "daily"
+                }
+              ]
+            },
+            "description": "Calculate revenue trends over time by day"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue Trends (Quarterly)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/trends?startDate=2023-01-01&endDate=2024-12-31&interval=quarterly",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "trends"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "interval",
+                  "value": "quarterly"
+                }
+              ]
+            },
+            "description": "Calculate revenue trends over time by quarter"
+          },
+          "response": []
+        },
+        {
+          "name": "Revenue Trends (Yearly)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/trends?startDate=2020-01-01&endDate=2024-12-31&interval=yearly",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "trends"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2020-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "interval",
+                  "value": "yearly"
+                }
+              ]
+            },
+            "description": "Calculate revenue trends over time by year"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Error Handling Tests",
+      "item": [
+        {
+          "name": "Invalid Date Format",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/total?startDate=invalid&endDate=2024-12-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "total"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "invalid"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            },
+            "description": "Test error handling for invalid date format"
+          },
+          "response": []
+        },
+        {
+          "name": "End Date Before Start Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/total?startDate=2024-12-31&endDate=2023-01-01",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "total"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2023-01-01"
+                }
+              ]
+            },
+            "description": "Test error handling for end date before start date"
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid Interval",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analysis/revenue/trends?startDate=2023-01-01&endDate=2024-12-31&interval=invalid",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analysis",
+                "revenue",
+                "trends"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "interval",
+                  "value": "invalid"
+                }
+              ]
+            },
+            "description": "Test error handling for invalid interval value"
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Without Files",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/data/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "data",
+                "refresh"
+              ]
+            },
+            "description": "Test error handling when no CSV files are available"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ]
+}
